@@ -1,0 +1,1 @@
+require 'billing/extensions/logging'

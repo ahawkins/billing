@@ -238,3 +238,32 @@ bank.credit_for! 5, :search, :engine => :hoovers do
   # whatever you need to do
 end
 ```
+
+## Extensions
+
+Billings is designed to be extended via Modules. You can include more
+modules into the managing class. Here is the current extension list:
+
+1. Logging (can also be used for auditing)
+
+
+### Logging
+
+You can log (and audit) all transcations made through your managers by
+including the `Billing::Extensions::Logging` into your class. The
+default logger is `Logger.new($stdout).` Here is an example
+
+```ruby
+class Bank
+  include Billings::Tab
+  include Billings::Extensions::Logging
+
+  # redefine the logger method if you want to use your own
+  # custom logger.
+  #
+  # The class uses the "info" log level
+  def logger
+    Log4r.new $stdout
+  end
+end
+```
