@@ -2,7 +2,7 @@ module Billing
   module Helpers
     def debit_authorized?(object, *args)
       cost = current_tab.calculate object, *args
-      current_tab.balance >= cost
+      current_tab.debit_authorized?(cost)
     end
 
     def debit!(object, *args)
@@ -32,12 +32,12 @@ module Billing
       end
     end
 
-    def debit_for!(multiple, object, *args, &block)
+    def debit_for(multiple, object, *args, &block)
       cost = multiple * (current_tab.calculate object, *args)
       debit!(cost, &block)
     end
 
-    def credit_for!(multiple, object, *args, &block)
+    def credit_for(multiple, object, *args, &block)
       cost = multiple * (current_tab.calculate object, *args)
       credit!(cost, &block)
     end

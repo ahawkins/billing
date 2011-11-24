@@ -21,10 +21,11 @@ describe Billing::Helpers do
 
   describe "#debit_authorized?" do
     it "should be true when there is enough in the tab" do
-      tab.stub(:balance).and_return(10)
-      tab.stub(:calculate).with(:sms).and_return(2)
+      tab.stub(:calculate).with(:sms).and_return(10)
 
-      subject.debit_authorized?(:sms).should be_true
+      tab.should_receive(:debit_authorized?).with(10)
+
+      subject.debit_authorized?(:sms)
     end
   end
 
@@ -78,7 +79,7 @@ describe Billing::Helpers do
 
       tab.should_receive(:debit).with(10)
 
-      subject.debit_for! 5, :sms
+      subject.debit_for 5, :sms
     end
 
     it "should be able to work with a block" do
@@ -88,7 +89,7 @@ describe Billing::Helpers do
 
       tab.should_not_receive(:debit).with(10)
 
-      subject.debit_for! 5, :sms do
+      subject.debit_for 5, :sms do
         raise RuntimeError
       end
     end
@@ -131,7 +132,7 @@ describe Billing::Helpers do
 
       tab.should_receive(:credit).with(10)
 
-      subject.credit_for! 5, :sms
+      subject.credit_for 5, :sms
     end
 
     it "should be able to work with a block" do
@@ -140,7 +141,7 @@ describe Billing::Helpers do
 
       tab.should_not_receive(:credit).with(10)
 
-      subject.credit_for! 5, :sms do
+      subject.credit_for 5, :sms do
         raise RuntimeError
       end
     end

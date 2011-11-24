@@ -55,10 +55,7 @@ class Account
   #
   # The actions should be atomic!
 
-  def balance
-  end
-
-  def authorized?(amount)
+  def debit_authorized?(amount)
   end
 
   def debit(amount)
@@ -77,11 +74,7 @@ class Account
     @balance = 0
   end
 
-  def balance
-    @balance
-  end
-
-  def authorized?(amount)
+  def debit_authorized?(amount)
     @balance >= amount
   end
 
@@ -230,11 +223,11 @@ They work the same way, except take an a numeric argument first to
 multiply the charge by.
 
 ```ruby
-bank.debit_for! 5, :sms
+bank.debit_for 5, :sms
 
-bank.credit_for! 13, :searches
+bank.credit_for 13, :searches
 
-bank.credit_for! 5, :search, :engine => :hoovers do
+bank.credit_for 5, :search, :engine => :hoovers do
   # whatever you need to do
 end
 ```
@@ -271,13 +264,13 @@ end
 
 ### Callbacks
 
-Enabled `before_*`, `after_`, and `around_` callbacks on `debit` and
+Enables `before_*`, `after_`, and `around_` callbacks on `debit` and
 `credit`
 
 ```ruby
 class Bank
   include Billings::Tab
-  include Billings::Extensions::Callback
+  include Billings::Extensions::Callbacks
 
   after_debit :send_charge_notification
 
