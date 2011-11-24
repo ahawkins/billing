@@ -147,17 +147,17 @@ bank.charge_authorized? :sms
 # Charge something to their account
 #
 # This changes the account balance!
-bank.debit! :sms
+bank.debit :sms
 
 # Add something to their account
 #
 # This change the account balance!
-bank.credit! :sms
+bank.credit :sms
 
 # You can also use a Fixnum or Float
 # if you want to credit or debit an arbitrary amount
-bank.credit! 591
-bank.debit! 382.75
+bank.credit 591
+bank.debit 382.75
 ```
 
 ### Calculating Costs
@@ -239,6 +239,7 @@ modules into the managing class. Here is the current extension list:
 
 1. Logging (can also be used for auditing)
 2. Callbacks
+3. Observing
 
 
 ### Logging
@@ -264,7 +265,7 @@ end
 
 ### Callbacks
 
-Enables `before_*`, `after_`, and `around_` callbacks on `debit` and
+Enables `before_*` and `after_` callbacks on `debit` and
 `credit`
 
 ```ruby
@@ -284,4 +285,29 @@ class Bank
     # weee
   end
 end
+```
+
+### Observering
+
+Enables `before_*` and `after_` callbacks on `debit` and
+`credit` for observers
+
+```ruby
+class Bank
+  include Billings::Tab
+  include Billings::Extensions::Observers
+end
+
+class BankObserver < ActiveModel::Observer
+  def before_debit(*args)
+  end
+
+  def after_debit(*args)
+  end
+
+  def before_credit(*args)
+  end
+
+  def after_credit(*args)
+  end
 ```

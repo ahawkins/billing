@@ -1,3 +1,5 @@
+require 'spec_helper'
+
 class LoggingBank
   include Billing::Helpers
   include Billing::Extensions::Logging
@@ -10,19 +12,19 @@ describe LoggingBank do
 
   before(:each) { Logger.stub(:new).and_return(logger) }
 
-  it "should log calls to debit!" do
+  it "should log calls to debit" do
     subject.stub(:current_tab).and_return(tab)
 
     logger.should_receive(:info).with(:these => :arguments)
 
-    subject.debit! :these => :arguments
+    subject.debit :these => :arguments
   end
 
-  it "should log calls to credit!" do
+  it "should log calls to credit" do
     subject.stub(:current_tab).and_return(tab)
 
     logger.should_receive(:info).with(:these => :arguments)
 
-    subject.credit! :these => :arguments
+    subject.credit :these => :arguments
   end
 end

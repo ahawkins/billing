@@ -1,13 +1,5 @@
 module Billing
-  class NotEnoughFunds < RuntimeError
-    def initialize(cost, available_funds)
-      @cost, @available_funds = cost, available_funds
-    end
-
-    def to_s
-      %Q{Expected account to a mininum balance of "#{@cost}", but only had "#{@available_funds}"}
-    end
-  end
+  class NotEnoughFunds < RuntimeError ; end
 
   class UnknownCost < RuntimeError
     def initialize(product)

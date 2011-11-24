@@ -8,16 +8,16 @@ module Billing
       included do
         extend ActiveModel::Callbacks
 
-        define_model_callbacks :credit, :debit
+        define_model_callbacks :debit, :credit, :only => [:before, :after]
       end
 
-      def debit!(*args)
+      def debit(*args)
         run_callbacks :debit do
           super
         end
       end
 
-      def credit!(*args)
+      def credit(*args)
         run_callbacks :credit do
           super 
         end

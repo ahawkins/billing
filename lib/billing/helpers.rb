@@ -5,9 +5,10 @@ module Billing
       current_tab.debit_authorized?(cost)
     end
 
-    def debit!(object, *args)
+    def debit(object, *args)
       cost = current_tab.calculate object, *args
-      raise NotEnoughFunds.new(cost, current_tab.balance) unless current_tab.balance >= cost
+
+      raise NotEnoughFunds unless debit_authorized?(cost)
 
       if block_given?
         begin
@@ -19,7 +20,7 @@ module Billing
       end
     end
 
-    def credit!(object, *args)
+    def credit(object, *args)
       cost = current_tab.calculate object, *args
 
       if block_given?
@@ -34,12 +35,12 @@ module Billing
 
     def debit_for(multiple, object, *args, &block)
       cost = multiple * (current_tab.calculate object, *args)
-      debit!(cost, &block)
+      debit(cost, &block)
     end
 
     def credit_for(multiple, object, *args, &block)
       cost = multiple * (current_tab.calculate object, *args)
-      credit!(cost, &block)
+      credit(cost, &block)
     end
   end
 end
