@@ -14,9 +14,11 @@ module Billing
         begin
           yield
           current_tab.debit cost
+          cost
         rescue ; end
       else
         current_tab.debit cost
+        cost
       end
     end
 
@@ -27,9 +29,11 @@ module Billing
         begin
           yield
           current_tab.credit cost
+          cost
         rescue ; end
       else
         current_tab.credit cost
+        cost
       end
     end
 
