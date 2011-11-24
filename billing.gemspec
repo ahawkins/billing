@@ -4,9 +4,9 @@ require File.expand_path('../lib/billing/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["Adman65"]
   gem.email         = ["adman1965@gmail.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
-  gem.homepage      = ""
+  gem.description   = %q{Lightweight interface for managing financial standing in side your application}
+  gem.summary       = %q{}
+  gem.homepage      = "https://github.com/adman65/billing"
 
   gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   gem.files         = `git ls-files`.split("\n")
