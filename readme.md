@@ -312,3 +312,17 @@ class BankObserver < ActiveModel::Observer
   end
 end
 ```
+
+## The Future
+
+Billing's future is solving the things it does not do by adding them
+through extensions. Billing will never do _everything_ financially
+related. There are things Billing will never know about your application
+so it will always try to remain as abstract as possible. It will slowly
+creep toward this boundary: charging credit cards. I would like to see
+Billing go into the direction of doing everything but that while
+remaining as abstract as possible leaving only one implementation
+detail: charging credit cards. 
+
+I will add functionality as I need it. Look at extensions and other
+billings gems.
