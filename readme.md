@@ -245,6 +245,7 @@ Billings is designed to be extended via Modules. You can include more
 modules into the managing class. Here is the current extension list:
 
 1. Logging (can also be used for auditing)
+2. Callbacks
 
 
 ### Logging
@@ -264,6 +265,30 @@ class Bank
   # The class uses the "info" log level
   def logger
     Log4r.new $stdout
+  end
+end
+```
+
+### Callbacks
+
+Enabled `before_*`, `after_`, and `around_` callbacks on `debit` and
+`credit`
+
+```ruby
+class Bank
+  include Billings::Tab
+  include Billings::Extensions::Callback
+
+  after_debit :send_charge_notification
+
+  after_credit :send_refund_notification
+
+  def send_charge_notification
+    # weeee
+  end
+
+  def send_refund_notification
+    # weee
   end
 end
 ```

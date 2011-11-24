@@ -2,14 +2,6 @@ require 'spec_helper'
 
 class Cost
   include Billing::Cost
-
-  def sms
-    5
-  end
-
-  def push_notification
-    3
-  end
 end
 
 class Sms
@@ -36,6 +28,18 @@ describe TestTab do
           subject.calculate :unknown_product
         }.should raise_error(Billing::UnknownCost)
       end
+    end
+
+    it "should just return a fixnum" do
+      subject.calculate(5).should == 5
+    end
+
+    it "should just return a float" do
+      subject.calculate(55.0).should == 55.0
+    end
+
+    it "should just return a bignum" do
+      subject.calculate(321487123948721384).should == 321487123948721384
     end
 
     describe "When a symbol is passed" do

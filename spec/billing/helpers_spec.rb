@@ -2,6 +2,7 @@ require 'spec_helper'
 
 class Biller
   include Billing::Helpers
+  include Billing::Extensions::Callbacks
 
   attr_accessor :tab
 
@@ -17,6 +18,15 @@ end
 describe Billing::Helpers do
   let(:tab) { double('tab') }
   subject { Biller.new(tab) }
+
+  describe "#debit_authorized?" do
+    it "should be true when there is enough in the tab" do
+      tab.stub(:balance).and_return(10)
+      tab.stub(:calculate).with(:sms).and_return(2)
+
+      subject.debit_authorized?(:sms).should be_true
+    end
+  end
 
   describe "#credit!" do
     it "should debit the cost when there is enough funds" do

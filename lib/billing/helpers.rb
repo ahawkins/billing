@@ -1,8 +1,8 @@
 module Billing
   module Helpers
-    def charge_authorized?(object, *args)
+    def debit_authorized?(object, *args)
       cost = current_tab.calculate object, *args
-      current_table.balance >= cost
+      current_tab.balance >= cost
     end
 
     def debit!(object, *args)
