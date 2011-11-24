@@ -1,6 +1,6 @@
 # Billing
 
-[![Build Status](https://secure.travis-ci.org/adman65/billing.png)](http://travis-ci.org/adman65/billing)
+[![Build Status](https://secure.travis-ci.org/Adman65/billing.png)](http://travis-ci.org/adman65/billing)
 
 Billing is a simple library to credit and debit accounts. It provides a
 simple interface to calculate costs for individual things inside an
