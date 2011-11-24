@@ -310,4 +310,5 @@ class BankObserver < ActiveModel::Observer
 
   def after_credit(*args)
   end
+end
 ```
