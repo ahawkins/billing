@@ -160,6 +160,17 @@ bank.credit :sms
 # if you want to credit or debit an arbitrary amount
 bank.credit 591
 bank.debit 382.75
+
+# alias exists so you can use charge for `charge` for `debit` and
+# `refund` for `credit`. Bang methods exist as well, altough there is not
+# difference between them and the other methods. Use which ever syntax
+# you prefer
+
+bank.charge 55
+bank.refund! :sms
+
+bank.charge_for 16, :contacts
+bank.refund_for! 4, :emails
 ```
 
 ### Calculating Costs
